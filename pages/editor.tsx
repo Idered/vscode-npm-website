@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { useState } from "react";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { DependencyListItem } from "../components/DependencyListItem";
@@ -12,7 +11,7 @@ type PropTypes = {
 };
 
 export default function Editor(props: PropTypes) {
-  const { suggestions = [], query, dependencies } = props;
+  const { suggestions = [], query, dependencies = [] } = props;
   const mounted = useRef(false);
 
   useEffect(() => {
