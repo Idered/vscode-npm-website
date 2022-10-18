@@ -3,7 +3,7 @@ export default function Button(
   props: React.PropsWithChildren<{
     className?: string;
     href?: string;
-    tabindex?: string;
+    tabIndex?: number;
   }>
 ) {
   return (

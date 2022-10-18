@@ -11,43 +11,43 @@ export default function Logo() {
       >
         <g filter="url(#filter0_dd_717_406)">
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M65.6601 29.0376C64.8514 28.5763 63.934 28.3334 63.0001 28.3334C62.0662 28.3334 61.1488 28.5763 60.3401 29.0376L35.2601 43.3419C34.4516 43.8032 33.7802 44.4665 33.3133 45.2653C32.8463 46.0641 32.6004 46.9703 32.6001 47.8927V76.5043C32.6001 78.3817 33.6155 80.1179 35.2601 81.0551L60.3401 95.3624C61.1488 95.8238 62.0662 96.0667 63.0001 96.0667C63.934 96.0667 64.8514 95.8238 65.6601 95.3624L90.7401 81.0581C91.549 80.5967 92.2208 79.9328 92.6877 79.1335C93.1546 78.3341 93.4003 77.4273 93.4001 76.5043V47.8927C93.3998 46.9703 93.1538 46.0641 92.6869 45.2653C92.22 44.4665 91.5486 43.8032 90.7401 43.3419L65.6601 29.0346V29.0376Z"
             fill="white"
-            fill-opacity="0.1"
-            shape-rendering="crispEdges"
+            fillOpacity="0.1"
+            shapeRendering="crispEdges"
           />
           <path
             d="M65.3298 29.6167L66.3268 30.1855V30.1825L90.4097 43.921C91.1173 44.3246 91.7039 44.9046 92.1114 45.6017C92.5188 46.2988 92.7331 47.0889 92.7334 47.8927C92.7334 47.8928 92.7334 47.8929 92.7334 47.893V76.5043V76.5045C92.7336 77.3089 92.5195 78.0996 92.112 78.7972C91.7045 79.4949 91.1177 80.0752 90.4098 80.479C90.4098 80.4791 90.4098 80.4791 90.4097 80.4791L65.3298 94.7833L65.3298 94.7834C64.622 95.1872 63.8185 95.4 63.0001 95.4C62.1817 95.4 61.3782 95.1871 60.6704 94.7834L35.5904 80.4761L35.5902 80.4759C34.1513 79.656 33.2668 78.1395 33.2668 76.5043L33.2668 47.893C33.2668 47.8929 33.2668 47.8928 33.2668 47.8928C33.267 47.0889 33.4814 46.2988 33.8888 45.6017C34.2963 44.9046 34.8829 44.3247 35.5904 43.921C35.5904 43.921 35.5904 43.921 35.5904 43.921L60.6704 29.6167L60.6704 29.6167C61.3782 29.2129 62.1817 29 63.0001 29C63.8185 29 64.622 29.2129 65.3298 29.6167Z"
             stroke="url(#paint0_radial_717_406)"
-            stroke-width="1.33333"
-            shape-rendering="crispEdges"
+            strokeWidth="1.33333"
+            shapeRendering="crispEdges"
           />
           <path
             d="M65.3298 29.6167L66.3268 30.1855V30.1825L90.4097 43.921C91.1173 44.3246 91.7039 44.9046 92.1114 45.6017C92.5188 46.2988 92.7331 47.0889 92.7334 47.8927C92.7334 47.8928 92.7334 47.8929 92.7334 47.893V76.5043V76.5045C92.7336 77.3089 92.5195 78.0996 92.112 78.7972C91.7045 79.4949 91.1177 80.0752 90.4098 80.479C90.4098 80.4791 90.4098 80.4791 90.4097 80.4791L65.3298 94.7833L65.3298 94.7834C64.622 95.1872 63.8185 95.4 63.0001 95.4C62.1817 95.4 61.3782 95.1871 60.6704 94.7834L35.5904 80.4761L35.5902 80.4759C34.1513 79.656 33.2668 78.1395 33.2668 76.5043L33.2668 47.893C33.2668 47.8929 33.2668 47.8928 33.2668 47.8928C33.267 47.0889 33.4814 46.2988 33.8888 45.6017C34.2963 44.9046 34.8829 44.3247 35.5904 43.921C35.5904 43.921 35.5904 43.921 35.5904 43.921L60.6704 29.6167L60.6704 29.6167C61.3782 29.2129 62.1817 29 63.0001 29C63.8185 29 64.622 29.2129 65.3298 29.6167Z"
             stroke="url(#paint1_radial_717_406)"
-            stroke-width="1.33333"
-            shape-rendering="crispEdges"
+            strokeWidth="1.33333"
+            shapeRendering="crispEdges"
           />
         </g>
         <g filter="url(#filter1_f_717_406)">
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M65.6601 29.0376C64.8514 28.5763 63.934 28.3334 63.0001 28.3334C62.0662 28.3334 61.1488 28.5763 60.3401 29.0376L35.2601 43.3419C34.4516 43.8032 33.7802 44.4665 33.3133 45.2653C32.8463 46.0641 32.6004 46.9703 32.6001 47.8927V76.5043C32.6001 78.3817 33.6155 80.1179 35.2601 81.0551L60.3401 95.3624C61.1488 95.8238 62.0662 96.0667 63.0001 96.0667C63.934 96.0667 64.8514 95.8238 65.6601 95.3624L90.7401 81.0581C91.549 80.5967 92.2208 79.9328 92.6877 79.1335C93.1546 78.3341 93.4003 77.4273 93.4001 76.5043V47.8927C93.3998 46.9703 93.1538 46.0641 92.6869 45.2653C92.22 44.4665 91.5486 43.8032 90.7401 43.3419L65.6601 29.0346V29.0376Z"
             fill="white"
-            fill-opacity="0.1"
+            fillOpacity="0.1"
           />
           <path
             d="M65.3298 29.6167L66.3268 30.1855V30.1825L90.4097 43.921C91.1173 44.3246 91.7039 44.9046 92.1114 45.6017C92.5188 46.2988 92.7331 47.0889 92.7334 47.8927C92.7334 47.8928 92.7334 47.8929 92.7334 47.893V76.5043V76.5045C92.7336 77.3089 92.5195 78.0996 92.112 78.7972C91.7045 79.4949 91.1177 80.0752 90.4098 80.479C90.4098 80.4791 90.4098 80.4791 90.4097 80.4791L65.3298 94.7833L65.3298 94.7834C64.622 95.1872 63.8185 95.4 63.0001 95.4C62.1817 95.4 61.3782 95.1871 60.6704 94.7834L35.5904 80.4761L35.5902 80.4759C34.1513 79.656 33.2668 78.1395 33.2668 76.5043L33.2668 47.893C33.2668 47.8929 33.2668 47.8928 33.2668 47.8928C33.267 47.0889 33.4814 46.2988 33.8888 45.6017C34.2963 44.9046 34.8829 44.3247 35.5904 43.921C35.5904 43.921 35.5904 43.921 35.5904 43.921L60.6704 29.6167L60.6704 29.6167C61.3782 29.2129 62.1817 29 63.0001 29C63.8185 29 64.622 29.2129 65.3298 29.6167Z"
             stroke="url(#paint2_radial_717_406)"
-            stroke-width="1.33333"
+            strokeWidth="1.33333"
           />
           <path
             d="M65.3298 29.6167L66.3268 30.1855V30.1825L90.4097 43.921C91.1173 44.3246 91.7039 44.9046 92.1114 45.6017C92.5188 46.2988 92.7331 47.0889 92.7334 47.8927C92.7334 47.8928 92.7334 47.8929 92.7334 47.893V76.5043V76.5045C92.7336 77.3089 92.5195 78.0996 92.112 78.7972C91.7045 79.4949 91.1177 80.0752 90.4098 80.479C90.4098 80.4791 90.4098 80.4791 90.4097 80.4791L65.3298 94.7833L65.3298 94.7834C64.622 95.1872 63.8185 95.4 63.0001 95.4C62.1817 95.4 61.3782 95.1871 60.6704 94.7834L35.5904 80.4761L35.5902 80.4759C34.1513 79.656 33.2668 78.1395 33.2668 76.5043L33.2668 47.893C33.2668 47.8929 33.2668 47.8928 33.2668 47.8928C33.267 47.0889 33.4814 46.2988 33.8888 45.6017C34.2963 44.9046 34.8829 44.3247 35.5904 43.921C35.5904 43.921 35.5904 43.921 35.5904 43.921L60.6704 29.6167L60.6704 29.6167C61.3782 29.2129 62.1817 29 63.0001 29C63.8185 29 64.622 29.2129 65.3298 29.6167Z"
             stroke="url(#paint3_radial_717_406)"
-            stroke-width="1.33333"
+            strokeWidth="1.33333"
           />
         </g>
         <path
@@ -64,8 +64,8 @@ export default function Logo() {
         />
         <g opacity="0.74" filter="url(#filter2_f_717_406)">
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M65.3348 32.7066C64.6254 32.297 63.8207 32.0814 63.0015 32.0814C62.1824 32.0814 61.3777 32.297 60.6683 32.7066L38.6692 45.4048C37.96 45.8142 37.371 46.4031 36.9615 47.1122C36.5519 47.8213 36.3362 48.6257 36.3359 49.4446V74.8436C36.3359 76.5102 37.2266 78.0514 38.6692 78.8834L60.6683 91.5842C61.3777 91.9938 62.1824 92.2094 63.0015 92.2094C63.8207 92.2094 64.6254 91.9938 65.3348 91.5842L87.3339 78.8861C88.0434 78.4764 88.6327 77.8871 89.0422 77.1775C89.4518 76.4679 89.6673 75.6629 89.6671 74.8436V49.4446C89.6669 48.6257 89.4511 47.8213 89.0416 47.1122C88.632 46.4031 88.0431 45.8142 87.3339 45.4048L65.3348 32.7039V32.7066ZM62.6682 36.1678C62.7696 36.1093 62.8845 36.0785 63.0015 36.0785C63.1185 36.0785 63.2335 36.1093 63.3348 36.1678L83.6674 47.906L63.0015 59.8362L42.3357 47.906L62.6682 36.1678ZM40.3358 51.3725V74.8462C40.3358 75.0862 40.4638 75.3049 40.6691 75.4222L61.0016 87.1604V63.3027L40.3358 51.3725ZM65.0014 87.1604L85.334 75.4222C85.4351 75.3638 85.5191 75.2799 85.5776 75.1788C85.6361 75.0777 85.667 74.963 85.6673 74.8462V51.3699L65.0014 63.3V87.1577V87.1604Z"
             fill="url(#paint7_radial_717_406)"
           />
@@ -86,9 +86,9 @@ export default function Logo() {
             width="124.8"
             height="131.733"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feColorMatrix
               in="SourceAlpha"
               type="matrix"
@@ -139,9 +139,9 @@ export default function Logo() {
             width="96.7998"
             height="103.733"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -160,9 +160,9 @@ export default function Logo() {
             width="105.331"
             height="112.128"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -182,8 +182,8 @@ export default function Logo() {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(74.6376 28.3334) rotate(119.072) scale(46.9222 44.5166)"
           >
-            <stop stop-color="white" stop-opacity="0.8" />
-            <stop offset="1" stop-color="white" stop-opacity="0" />
+            <stop stopColor="white" stopOpacity="0.8" />
+            <stop offset="1" stopColor="white" stopOpacity="0" />
           </radialGradient>
           <radialGradient
             id="paint1_radial_717_406"
@@ -193,8 +193,8 @@ export default function Logo() {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(32.6001 96.0667) rotate(-30.5189) scale(61.4798 65.0598)"
           >
-            <stop stop-color="white" stop-opacity="0.4" />
-            <stop offset="1" stop-color="white" stop-opacity="0" />
+            <stop stopColor="white" stopOpacity="0.4" />
+            <stop offset="1" stopColor="white" stopOpacity="0" />
           </radialGradient>
           <radialGradient
             id="paint2_radial_717_406"
@@ -204,8 +204,8 @@ export default function Logo() {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(74.6376 28.3334) rotate(119.072) scale(46.9222 44.5166)"
           >
-            <stop stop-color="white" stop-opacity="0.8" />
-            <stop offset="1" stop-color="white" stop-opacity="0" />
+            <stop stopColor="white" stopOpacity="0.8" />
+            <stop offset="1" stopColor="white" stopOpacity="0" />
           </radialGradient>
           <radialGradient
             id="paint3_radial_717_406"
@@ -215,8 +215,8 @@ export default function Logo() {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(32.6001 96.0667) rotate(-30.5189) scale(61.4798 65.0598)"
           >
-            <stop stop-color="white" stop-opacity="0.4" />
-            <stop offset="1" stop-color="white" stop-opacity="0" />
+            <stop stopColor="white" stopOpacity="0.4" />
+            <stop offset="1" stopColor="white" stopOpacity="0" />
           </radialGradient>
           <radialGradient
             id="paint4_radial_717_406"
@@ -226,9 +226,9 @@ export default function Logo() {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(63 32.0666) rotate(90) scale(60.2667 53.4542)"
           >
-            <stop stop-color="white" />
-            <stop offset="0.765625" stop-color="#E0E0E0" />
-            <stop offset="1" stop-color="#4F4F4F" />
+            <stop stopColor="white" />
+            <stop offset="0.765625" stopColor="#E0E0E0" />
+            <stop offset="1" stopColor="#4F4F4F" />
           </radialGradient>
           <radialGradient
             id="paint5_radial_717_406"
@@ -238,8 +238,8 @@ export default function Logo() {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(57.1333 109.4) rotate(-40.02) scale(45.6156 40.4592)"
           >
-            <stop offset="0.447917" stop-color="white" />
-            <stop offset="1" stop-color="white" stop-opacity="0" />
+            <stop offset="0.447917" stopColor="white" />
+            <stop offset="1" stopColor="white" stopOpacity="0" />
           </radialGradient>
           <radialGradient
             id="paint6_radial_717_406"
@@ -249,8 +249,8 @@ export default function Logo() {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(57.1333 109.4) rotate(-40.02) scale(45.6156 40.4592)"
           >
-            <stop offset="0.447917" stop-color="white" />
-            <stop offset="1" stop-color="white" stop-opacity="0" />
+            <stop offset="0.447917" stopColor="white" />
+            <stop offset="1" stopColor="white" stopOpacity="0" />
           </radialGradient>
           <radialGradient
             id="paint7_radial_717_406"
@@ -260,9 +260,9 @@ export default function Logo() {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(63 32.0666) rotate(90) scale(60.2667 53.4542)"
           >
-            <stop stop-color="white" />
-            <stop offset="0.765625" stop-color="#E0E0E0" />
-            <stop offset="1" stop-color="#4F4F4F" />
+            <stop stopColor="white" />
+            <stop offset="0.765625" stopColor="#E0E0E0" />
+            <stop offset="1" stopColor="#4F4F4F" />
           </radialGradient>
           <radialGradient
             id="paint8_radial_717_406"
@@ -272,8 +272,8 @@ export default function Logo() {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(57.1333 109.4) rotate(-40.02) scale(45.6156 40.4592)"
           >
-            <stop offset="0.447917" stop-color="white" />
-            <stop offset="1" stop-color="white" stop-opacity="0" />
+            <stop offset="0.447917" stopColor="white" />
+            <stop offset="1" stopColor="white" stopOpacity="0" />
           </radialGradient>
           <radialGradient
             id="paint9_radial_717_406"
@@ -283,8 +283,8 @@ export default function Logo() {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(57.1333 109.4) rotate(-40.02) scale(45.6156 40.4592)"
           >
-            <stop offset="0.447917" stop-color="white" />
-            <stop offset="1" stop-color="white" stop-opacity="0" />
+            <stop offset="0.447917" stopColor="white" />
+            <stop offset="1" stopColor="white" stopOpacity="0" />
           </radialGradient>
         </defs>
       </svg>
