@@ -8,10 +8,26 @@ type PropTypes = {
   className?: string;
   dependencies: Dependency[];
   suggestions: Suggestion[];
+  packageJsonFile: string;
+  packageJsonFiles: {
+    name: string;
+    group?: string;
+    children?: {
+      name: string;
+    }[];
+  }[];
+  suggestionIndex: number;
 };
 
 export default function Editor(props: PropTypes) {
-  const { suggestions = [], query, dependencies = [] } = props;
+  const {
+    suggestions = [],
+    query,
+    dependencies = [],
+    suggestionIndex,
+    packageJsonFile,
+    packageJsonFiles,
+  } = props;
   const mounted = useRef(false);
 
   useEffect(() => {
@@ -64,6 +80,58 @@ export default function Editor(props: PropTypes) {
           <div className="uppercase text-[11px] pl-5 leading-9">
             Node Dependencies
           </div>
+
+          <AnimatePresence>
+            {packageJsonFile && (
+              <motion.div
+                className="mx-5 mb-2"
+                animate={{
+                  opacity: [0, 0, 1],
+                  translateX: [-5, -5, 0],
+                  height: [0, 26, 26],
+                  marginBottom: [0, 8, 8],
+                }}
+                exit={{
+                  opacity: [1, 0, 0],
+                  translateX: [0, -5, -5],
+                  height: [26, 26, 0],
+                  marginBottom: [8, 8, 0],
+                }}
+              >
+                <div
+                  className={cx(
+                    "flex items-center bg-[rgb(15,14,14)] border border-[rgb(15,14,14)] px-2",
+                    {}
+                  )}
+                >
+                  {/* "border-[#ad9cff] z-20 relative": query, */}
+                  <div
+                    className={cx(
+                      "bg-transparent text-[13px] h-6 basis-full outline-none flex items-center text-[#999999]",
+                      {}
+                    )}
+                  >
+                    {packageJsonFile}
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    role="img"
+                    className=" pointer-events-none transition-transform"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 16 16"
+                    height="12"
+                  >
+                    <path
+                      fill="currentColor"
+                      fillRule="evenodd"
+                      d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                    />
+                  </svg>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <div className="mx-5 relative">
             <div
               className={cx(
@@ -99,11 +167,11 @@ export default function Editor(props: PropTypes) {
             </div>
             {!!suggestions.length && (
               <div className="absolute z-10 -mt-px inset-x-0 border border-[#444] p-px bg-black text-[rgba(229,229,229,0.7)]">
-                {suggestions.map((item) => (
+                {suggestions.map((item, index) => (
                   <div
                     key={item.name}
                     className={cx("px-3 py-2 flex flex-wrap items-center", {
-                      "bg-[#444] selected": item.name === query,
+                      "bg-[#444] selected": index === suggestionIndex,
                     })}
                   >
                     <div
@@ -118,9 +186,9 @@ export default function Editor(props: PropTypes) {
                     <svg viewBox="0 0 16 16" width="16" height="16">
                       <path
                         fill="currentColor"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M11.957 6h.05a2.99 2.99 0 0 1 2.116.879a3.003 3.003 0 0 1 0 4.242a2.99 2.99 0 0 1-2.117.879v-1a2.002 2.002 0 0 0 0-4h-.914l-.123-.857a2.49 2.49 0 0 0-2.126-2.122A2.478 2.478 0 0 0 6.231 5.5l-.333.762l-.809-.189A2.49 2.49 0 0 0 4.523 6c-.662 0-1.297.263-1.764.732A2.503 2.503 0 0 0 4.523 11h.498v1h-.498a3.486 3.486 0 0 1-2.628-1.16a3.502 3.502 0 0 1 1.958-5.78a3.462 3.462 0 0 1 1.468.04a3.486 3.486 0 0 1 3.657-2.06A3.479 3.479 0 0 1 11.957 6zm-5.25 5.121l1.314 1.314V7h.994v5.4l1.278-1.279l.707.707l-2.146 2.147h-.708L6 11.829l.707-.708z"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                       />
                     </svg>
                     <span className="ml-1 text-xs">{item.downloads}</span>

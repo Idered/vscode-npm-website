@@ -13,82 +13,110 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [dependencies, setDependencies] = useState<Dependency[]>(DEPENDENCIES);
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const [suggestionIndex, setSuggestionIndex] = useState(0);
+  const [packageJsonFiles, setPackageJsonFiles] = useState([
+    {
+      name: "package.json",
+    },
+  ]);
+  const [packageJsonFile, setPackageJsonFile] = useState("");
   const tl = useRef<gsap.core.Timeline>(null);
+  const q = "react-r";
+  const installedPackage = "react-router-dom";
 
   useEffect(() => {
-    const t1 = ScrollTrigger.create({
-      trigger: ".editor",
-      start: "50% 50%",
-      end: "+=1000 top",
-      id: "editor",
+    const instances = [];
+    const register = (...items) => instances.push(...items);
+    const titleAnimation = {
+      keyframes: {
+        "0%": { opacity: 0, translateX: -32 },
+        "25%": { opacity: 1, translateX: 0 },
+        "75%": { opacity: 1, translateX: 0 },
+        "100%": { opacity: 0, translateX: 32 },
+      },
+    };
+    const defaults = {
+      start: "top 0",
+      end: "+=100%",
+      pinSpacing: false,
       scrub: true,
-      markers: true,
-      pin: document.querySelector(".screenshot"),
-    });
-    const t2 = ScrollTrigger.create({
-      trigger: "[data-section]",
-      start: "top 50%",
-      id: "section-1",
-      end: "bottom bottom",
-      // end: "+=1000 top",
-      scrub: true,
-      markers: true,
-      onUpdate: (self) => {
-        const q = "react-router";
-        const nextQ = q
-          .split("")
-          .slice(0, q.length * self.progress * 1.5)
-          .join("");
-        setQuery(nextQ);
-        setSuggestions(nextQ === q ? SUGGESTIONS : []);
-        if (self.progress >= 0.9) {
+      pin: true,
+    };
+
+    register(
+      ScrollTrigger.create({
+        trigger: ".editor",
+        start: "50% 50%",
+        end: () => {
+          const el = document.querySelector<HTMLDivElement>(
+            "[data-section]:last-child"
+          );
+          return el?.offsetTop + el?.offsetHeight + 2000;
+        },
+        scrub: true,
+        pin: document.querySelector(".screenshot"),
+      }),
+      ScrollTrigger.create({
+        ...defaults,
+        trigger: "[data-section='1']",
+        animation: gsap.to('[data-section="1"]', titleAnimation),
+        onUpdate: (self) => {
+          const len = q.length * self.progress * 2;
+          const nextQuery = q.split("").slice(0, len).join("");
+          setQuery(nextQuery);
+          setSuggestions(nextQuery === q ? SUGGESTIONS : []);
+          setSuggestionIndex(self.progress >= 0.75 ? 1 : 0);
+        },
+      }),
+      ScrollTrigger.create({
+        ...defaults,
+        trigger: "[data-section='2']",
+        animation: gsap.to('[data-section="2"]', titleAnimation),
+        onUpdate: (self) => {
           setQuery("");
           setSuggestions([]);
+          const isLoading = self.progress < 0.5;
           setDependencies([
             ...DEPENDENCIES,
-            {
-              name: "react-router",
-              version: "6.4.2",
-              isLoading: true,
-            },
+            { name: installedPackage, version: "6.4.2", isLoading },
           ]);
-        }
-        // if (self.progress >= 0.9) {
-        //   setDependencies([
-        //     ...DEPENDENCIES,
-        //     {
-        //       name: "react-router",
-        //       version: "6.4.2",
-        //       isLoading: false,
-        //     },
-        //   ]);
-        // }
-      },
-      // onLeaveBack: () => {
-      //   setQuery("react-router");
-      //   setSuggestions(SUGGESTIONS);
-      //   setDependencies(DEPENDENCIES);
-      // },
-    });
+        },
+        onLeaveBack: () => setDependencies(DEPENDENCIES),
+      }),
+      ScrollTrigger.create({
+        ...defaults,
+        trigger: "[data-section='3']",
+        animation: gsap.to('[data-section="3"]', titleAnimation),
+        onUpdate: (self) => {
+          setDependencies([
+            ...DEPENDENCIES,
+            { name: installedPackage, version: "6.4.2", isVulnerable: true },
+          ]);
+        },
+        onLeaveBack: () => {
+          setDependencies([
+            ...DEPENDENCIES,
+            { name: installedPackage, version: "6.4.2", isVulnerable: false },
+          ]);
+        },
+      }),
+      ScrollTrigger.create({
+        ...defaults,
+        pinSpacing: true,
+        trigger: "[data-section='4']",
+        animation: gsap.to('[data-section="4"]', titleAnimation),
+        onUpdate: (self) => {
+          setPackageJsonFile("package.json");
+        },
+        onLeaveBack: () => {
+          setPackageJsonFile("");
+        },
+      })
+    );
 
     return () => {
-      t1.kill();
-      t2.kill();
+      instances.forEach((instance) => instance.kill());
     };
-    // tl.current
-    //   .addLabel("start")
-    //   // .from(screenshot.current, { scale: 0.3, rotation: 45 })
-    //   // .addLabel("spin")
-    //   .to(".editor", {
-    //     width: "880",
-    //   });
-    // .to(document.querySelector(".screenshot"), {
-    //   width: "880px",
-    // });
-    //   .addLabel("end")
-    //   .to(screenshot.current.querySelector("*"), {
-    //     // position: "fixed",
-    //   });
   }, []);
 
   return (
@@ -143,15 +171,18 @@ export default function Home() {
             query={query}
             dependencies={dependencies}
             suggestions={suggestions}
+            suggestionIndex={suggestionIndex}
+            packageJsonFile={packageJsonFile}
+            packageJsonFiles={packageJsonFiles}
           />
         </div>
       </div>
 
       <section
         className="min-h-screen max-w-[1020px] mx-auto flex items-center"
-        data-section
+        data-section="1"
       >
-        <h2 className="text-lime-400 font-bold text-4xl font-display">
+        <h2 className="text-[#33e6cb] font-bold text-4xl font-display">
           Autocomplete
           <span className="text-white">
             <br /> powered by Algolia
@@ -161,12 +192,36 @@ export default function Home() {
 
       <section
         className="min-h-screen max-w-[1020px] mx-auto flex items-center"
-        data-section
+        data-section="2"
       >
-        <h2 className="text-lime-400 font-bold text-4xl font-display">
-          Autocomplete
+        <h2 className="text-[#33e6cb] font-bold text-4xl font-display">
+          Supports
           <span className="text-white">
-            <br /> powered by Algolia
+            <br /> npm, yarn and pnpm
+          </span>
+        </h2>
+      </section>
+
+      <section
+        className="min-h-screen max-w-[1020px] mx-auto flex items-center"
+        data-section="3"
+      >
+        <h2 className="text-[#33e6cb] font-bold text-4xl font-display">
+          Security Audit
+          <span className="text-white">
+            <br /> running in background
+          </span>
+        </h2>
+      </section>
+
+      <section
+        className="min-h-screen max-w-[1020px] mx-auto flex items-center"
+        data-section="4"
+      >
+        <h2 className="text-[#33e6cb] font-bold text-4xl font-display">
+          Monorepo
+          <span className="text-white">
+            <br /> easy to manage
           </span>
         </h2>
       </section>
