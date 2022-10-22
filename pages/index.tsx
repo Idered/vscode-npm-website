@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import Editor from "./editor";
 import { DEPENDENCIES, SUGGESTIONS } from "../constants";
+import Head from "next/head";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -222,6 +223,33 @@ export default function Home() {
 
   return (
     <div className="px-8">
+      <Head>
+        <title>Node Dependencies UI for VS Code</title>
+        {/* add description */}
+        <meta
+          name="description"
+          content="Manage npm dependencies from Visual Studio Code sidebar. Supports npm, yarn, pnpm."
+        />
+        <meta property="og:type" content="website"></meta>
+        {/* prettier-ignore */}
+        <meta property="og:image" content="https://npm.kasper.io/og-image.png"></meta>
+        <meta property="og:image:width" content="1200"></meta>
+        <meta property="og:image:height" content="630"></meta>
+        <meta property="twitter:domain" content="npm.kasper.io"></meta>
+        <meta property="twitter:card" content="summary_large_image"></meta>
+        {/* prettier-ignore */}
+        <meta property="twitter:image" content="https://npm.kasper.io/og-image.png"></meta>
+        {/* prettier-ignore */}
+        <meta property="og:title" content="Node Dependencies UI for VS Code"></meta>
+        {/* prettier-ignore */}
+        <meta property="twitter:title" content="Node Dependencies UI for VS Code"></meta>
+        {/* prettier-ignore */}
+        <meta property="og:description" content="Manage npm dependencies from Visual Studio Code sidebar. Supports npm, yarn, pnpm."></meta>
+        {/* prettier-ignore */}
+        <meta property="twitter:description" content="Manage npm dependencies from Visual Studio Code sidebar. Supports npm, yarn, pnpm."></meta>
+        <meta property="og:url" content="https://npm.kasper.io/"></meta>
+        <meta property="twitter:url" content="https://npm.kasper.io/"></meta>
+      </Head>
       <div className="[background-image:url(/noise.png)] fixed inset-0 noise-mask pointer-events-none" />
       <div className="max-w-[1020px] mx-auto min-h-screen grid justify-items-center content-center gap-y-12 xl:gap-0 xl:flex items-center">
         <div className="flex-shrink-0" data-title-section>
