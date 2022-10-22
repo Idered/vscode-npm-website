@@ -258,7 +258,7 @@ export default function Home() {
       <div className="[background-image:url(/noise.png)] fixed inset-0 noise-mask pointer-events-none" />
       <div className="max-w-[1020px] mx-auto min-h-screen grid justify-items-center content-center gap-y-12 xl:gap-0 xl:flex items-center">
         <div
-          className="flex-shrink-0 grid justify-items-center"
+          className="flex-shrink-0 grid justify-items-center xl:justify-items-start"
           data-title-section
         >
           <div className="relative z-50 inline-block">
