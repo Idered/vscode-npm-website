@@ -14,9 +14,18 @@ export default function Home() {
   const [dependencies, setDependencies] = useState<Dependency[]>(DEPENDENCIES);
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [suggestionIndex, setSuggestionIndex] = useState(0);
-  const [packageJsonFiles, setPackageJsonFiles] = useState([
+  const [packageJsonFileIndex, setPackageJsonFileIndex] = useState(0);
+  const [packageJsonFiles, setPackageJsonFiles] = useState<
+    {
+      name: string;
+      type: "file" | "folder";
+      level: number;
+    }[]
+  >([
     {
       name: "package.json",
+      type: "file",
+      level: 0,
     },
   ]);
   const [packageJsonFile, setPackageJsonFile] = useState("");
@@ -25,6 +34,10 @@ export default function Home() {
   const installedPackage = "react-router-dom";
 
   useEffect(() => {
+    const innerSections = document.querySelectorAll("[data-section]>div");
+    const spacing = "0";
+    gsap.set(innerSections, { translateY: `-${spacing}vh` });
+
     const instances = [];
     const register = (...items) => instances.push(...items);
     const titleAnimation = {
@@ -35,8 +48,9 @@ export default function Home() {
         "100%": { opacity: 0, translateX: 32 },
       },
     };
-    const defaults = {
-      start: "top 0",
+
+    const defaults: ScrollTrigger.StaticVars = {
+      start: `-${spacing}% 0`,
       end: "+=100%",
       pinSpacing: false,
       scrub: true,
@@ -44,6 +58,29 @@ export default function Home() {
     };
 
     register(
+      ScrollTrigger.create({
+        trigger: "[data-title-section]",
+        start: "50% 50%",
+        end: "bottom top",
+        scrub: true,
+        pin: true,
+        animation: gsap.to("[data-title-section]", {
+          keyframes: {
+            opacity: [1, 0],
+            translateX: [0, -100],
+            // scaleX: [1, 1.15],
+            // scaleY: [1, 0.9],
+          },
+        }),
+      }),
+      ScrollTrigger.create({
+        trigger: "[data-title-section]",
+        start: "top 30%",
+        scrub: true,
+        animation: gsap.to(".screenshot", {
+          scale: 1.25,
+        }),
+      }),
       ScrollTrigger.create({
         trigger: ".editor",
         start: "50% 50%",
@@ -102,15 +139,77 @@ export default function Home() {
       }),
       ScrollTrigger.create({
         ...defaults,
-        pinSpacing: true,
         trigger: "[data-section='4']",
         animation: gsap.to('[data-section="4"]', titleAnimation),
         onUpdate: (self) => {
-          setPackageJsonFile("package.json");
+          const monorepoPackages = [
+            { name: "package.json", type: "file" as const, level: 0 },
+            { name: "components", type: "folder" as const, level: 0 },
+            { name: "avatar", type: "file" as const, level: 1 },
+            { name: "button", type: "file" as const, level: 1 },
+            { name: "dialog", type: "file" as const, level: 1 },
+          ];
+          const openDropdown = self.progress >= 0.4 && self.progress < 0.8;
+          const useDialogIndex = self.progress >= 0.55;
+          const useDialogPackage = self.progress >= 0.8;
+          const useDialogPackages = self.progress >= 0.8;
+          setPackageJsonFile(useDialogPackage ? "dialog" : "package.json");
+          setPackageJsonFileIndex(useDialogIndex ? 4 : 0);
+          setDependencies(
+            useDialogPackages
+              ? [{ name: "@radix-ui/react-dialog", version: "1.0.2" }]
+              : [
+                  ...DEPENDENCIES,
+                  {
+                    name: installedPackage,
+                    version: "6.4.2",
+                    isVulnerable: false,
+                  },
+                ]
+          );
+          setPackageJsonFiles(
+            openDropdown
+              ? monorepoPackages
+              : [
+                  {
+                    name: "package.json",
+                    type: "file" as const,
+                    level: 0,
+                  },
+                ]
+          );
         },
         onLeaveBack: () => {
           setPackageJsonFile("");
         },
+      }),
+      ScrollTrigger.create({
+        ...defaults,
+        // pinSpacing: true,
+        pin: false,
+        trigger: "[data-section='5']",
+        animation: gsap.to('[data-section="5"]', titleAnimation),
+      }),
+      ScrollTrigger.create({
+        ...defaults,
+        pinSpacing: false,
+        trigger: "[data-section='5']",
+        animation: gsap.to(".editor", {
+          opacity: 0,
+          filter: "blur(8px)",
+          scale: 1.5,
+        }),
+      }),
+      ScrollTrigger.create({
+        ...defaults,
+        pinSpacing: true,
+        trigger: "[data-section='6']",
+        animation: gsap.to('[data-section="6"]', {
+          keyframes: {
+            "0%": { opacity: 0, translateX: -32 },
+            "50%": { opacity: 1, translateX: 0 },
+          },
+        }),
       })
     );
 
@@ -120,14 +219,14 @@ export default function Home() {
   }, []);
 
   return (
-    <div className=" group ">
-      {/* <div className="[background-image:url(/noise.png)] fixed inset-0 noise-mask pointer-events-none" /> */}
+    <div>
+      <div className="[background-image:url(/noise.png)] fixed inset-0 noise-mask pointer-events-none" />
       <div className="max-w-[1020px] mx-auto min-h-screen flex items-center">
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0" data-title-section>
           <div className="relative z-50 inline-block">
             <Logo />
-            {/* <div className="w-[200vw] h-[200vh] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 global-mask z-50"></div> */}
           </div>
+
           <h1 className=" font-semibold leading-[3.5rem] text-5xl headline mt-6 font-display">
             Node Dependencies UI <br /> for VS Code
           </h1>
@@ -174,6 +273,7 @@ export default function Home() {
             suggestionIndex={suggestionIndex}
             packageJsonFile={packageJsonFile}
             packageJsonFiles={packageJsonFiles}
+            packageJsonFileIndex={packageJsonFileIndex}
           />
         </div>
       </div>
@@ -182,48 +282,123 @@ export default function Home() {
         className="min-h-screen max-w-[1020px] mx-auto flex items-center"
         data-section="1"
       >
-        <h2 className="text-[#33e6cb] font-bold text-4xl font-display">
-          Autocomplete
-          <span className="text-white">
-            <br /> powered by Algolia
-          </span>
-        </h2>
+        <div>
+          <h2 className="text-[#33e6cb] font-bold text-4xl font-display">
+            Autocomplete
+            <span className="text-white">
+              <br /> powered by Algolia
+            </span>
+          </h2>
+        </div>
       </section>
 
       <section
         className="min-h-screen max-w-[1020px] mx-auto flex items-center"
         data-section="2"
       >
-        <h2 className="text-[#33e6cb] font-bold text-4xl font-display">
-          Supports
-          <span className="text-white">
-            <br /> npm, yarn and pnpm
-          </span>
-        </h2>
+        <div>
+          <h2 className="text-[#33e6cb] font-bold text-4xl font-display">
+            Supports
+            <span className="text-white">
+              <br /> npm, yarn and pnpm
+            </span>
+          </h2>
+        </div>
       </section>
 
       <section
         className="min-h-screen max-w-[1020px] mx-auto flex items-center"
         data-section="3"
       >
-        <h2 className="text-[#33e6cb] font-bold text-4xl font-display">
-          Security Audit
-          <span className="text-white">
-            <br /> running in background
-          </span>
-        </h2>
+        <div>
+          <h2 className="text-[#33e6cb] font-bold text-4xl font-display">
+            Security Audit
+            <span className="text-white">
+              <br /> running in background
+            </span>
+          </h2>
+        </div>
       </section>
 
       <section
         className="min-h-screen max-w-[1020px] mx-auto flex items-center"
         data-section="4"
       >
-        <h2 className="text-[#33e6cb] font-bold text-4xl font-display">
-          Monorepo
-          <span className="text-white">
-            <br /> easy to manage
-          </span>
-        </h2>
+        <div>
+          <h2 className="text-[#33e6cb] font-bold text-4xl font-display">
+            Monorepo
+            <span className="text-white">
+              <br /> easy to manage
+            </span>
+          </h2>
+        </div>
+      </section>
+
+      <section
+        className="min-h-screen max-w-[1020px] mx-auto flex items-center"
+        data-section="5"
+      >
+        <div>
+          <h2 className="text-[#33e6cb] font-bold text-4xl font-display">
+            And more&hellip;
+            <span className="text-white">
+              <br /> for free
+            </span>
+          </h2>
+        </div>
+      </section>
+
+      <section
+        className="min-h-screen max-w-[1020px] mx-auto flex items-center justify-center"
+        data-section="6"
+      >
+        <div>
+          <div className="grid items-center mt-12  justify-items-center">
+            <div className="relative">
+              <Button
+                href="vscode:extension/idered.npm"
+                className="h-32 px-[200px] text-3xl peer relative z-10"
+              >
+                Install
+              </Button>
+              <Button
+                aria-hidden="true"
+                tabIndex={-1}
+                href="vscode:extension/idered.npm"
+                className="h-32 px-[200px] text-3xl absolute left-0 blur-lg transition-transform peer-hover:scale-x-105 peer-hover:scale-y-125 peer-active:scale-75 duration-500"
+              >
+                Install
+              </Button>
+            </div>
+
+            <div className="text-indigo-200/50 text-sm mt-6">
+              Using VS Code Insiders? Click{" "}
+              <a
+                href="vscode-insiders:extension/idered.npm"
+                className="text-[#33e6cb]/75 hover:text-[#33e6cb]/100 transition-colors"
+              >
+                here
+              </a>{" "}
+              to install.
+            </div>
+          </div>
+        </div>
+        <div className="text-indigo-200/50 text mt-24 fixed bottom-0 inset-x-0 text-center py-8 text-sm">
+          Made with{" "}
+          <a
+            href="https://www.buymeacoffee.com/idered"
+            className="hover:scale-125 inline-block transition-transform hover:text-white"
+          >
+            ☕️
+          </a>{" "}
+          by{" "}
+          <a
+            href="https://twitter.com/Idered"
+            className="text-[#33e6cb]/75 hover:text-[#33e6cb]/100 transition-colors"
+          >
+            @Idered
+          </a>
+        </div>
       </section>
 
       <style jsx global>{`
@@ -237,36 +412,12 @@ export default function Home() {
           );
           background-clip: text;
         }
-        .screenshot {
-          /* clip-path: path(
-            "M 0 0 L 360 0 L 360 300 C 360 510, 180 410, 0 510 z"
-          ); */
-          /* mask-image: linear-gradient(
-            to right bottom,
-            black 40%,
-            white 0%,
-            transparent 70%
-          ); */
-        }
-
-        .global-mask {
-          background: radial-gradient(transparent 0%, rgba(0, 0, 0, 0.9) 6%);
-          transition: all 1s ease-in-out;
-        }
-        body:hover .global-mask {
-          transform-origin: center;
-          transform: scale(10.5) translateX(-4%) translateY(-4%);
-        }
-         {
-          /* .screenshot-mask {
-          mask-image: linear-gradient(to right top, black 84%, transparent 92%);
-        }
-        .separator-mask {
-          mask-image: linear-gradient(to right top, black, transparent 100%);
-        }
         .noise-mask {
-          mask-image: linear-gradient(to right bottom, black, transparent 100%);
-        } */
+          mask-image: linear-gradient(
+            to right bottom,
+            black 25%,
+            transparent 100%
+          );
         }
       `}</style>
     </div>

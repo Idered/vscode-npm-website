@@ -9,12 +9,11 @@ type PropTypes = {
   dependencies: Dependency[];
   suggestions: Suggestion[];
   packageJsonFile: string;
+  packageJsonFileIndex: number;
   packageJsonFiles: {
     name: string;
-    group?: string;
-    children?: {
-      name: string;
-    }[];
+    type: "file" | "folder";
+    level: number;
   }[];
   suggestionIndex: number;
 };
@@ -25,6 +24,7 @@ export default function Editor(props: PropTypes) {
     query,
     dependencies = [],
     suggestionIndex,
+    packageJsonFileIndex,
     packageJsonFile,
     packageJsonFiles,
   } = props;
@@ -84,7 +84,7 @@ export default function Editor(props: PropTypes) {
           <AnimatePresence>
             {packageJsonFile && (
               <motion.div
-                className="mx-5 mb-2"
+                className="mx-5 mb-2 relative z-40"
                 animate={{
                   opacity: [0, 0, 1],
                   translateX: [-5, -5, 0],
@@ -101,7 +101,9 @@ export default function Editor(props: PropTypes) {
                 <div
                   className={cx(
                     "flex items-center bg-[rgb(15,14,14)] border border-[rgb(15,14,14)] px-2",
-                    {}
+                    {
+                      "border-[#ad9cff]": packageJsonFiles.length > 1,
+                    }
                   )}
                 >
                   {/* "border-[#ad9cff] z-20 relative": query, */}
@@ -116,7 +118,9 @@ export default function Editor(props: PropTypes) {
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     role="img"
-                    className=" pointer-events-none transition-transform"
+                    className={cx("pointer-events-none transition-transform", {
+                      "transform rotate-180": packageJsonFiles.length > 1,
+                    })}
                     preserveAspectRatio="xMidYMid meet"
                     viewBox="0 0 16 16"
                     height="12"
@@ -128,6 +132,25 @@ export default function Editor(props: PropTypes) {
                     />
                   </svg>
                 </div>
+                {packageJsonFiles.length > 1 && (
+                  <div className="z-50 absolute bg-[rgb(15,14,14)] inset-x-0 border border-[rgb(15,14,14)] ">
+                    {packageJsonFiles.map((item, index) => (
+                      <div
+                        key={item.name}
+                        className={cx("px-2 h-[22px] flex items-center", {
+                          "bg-[#04395e] text-white":
+                            index === packageJsonFileIndex,
+                          "font-semibold": item.type === "folder",
+                        })}
+                        style={{
+                          marginLeft: item.level * 12,
+                        }}
+                      >
+                        {item.name}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
