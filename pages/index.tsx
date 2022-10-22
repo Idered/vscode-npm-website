@@ -257,16 +257,19 @@ export default function Home() {
       </Head>
       <div className="[background-image:url(/noise.png)] fixed inset-0 noise-mask pointer-events-none" />
       <div className="max-w-[1020px] mx-auto min-h-screen grid justify-items-center content-center gap-y-12 xl:gap-0 xl:flex items-center">
-        <div className="flex-shrink-0" data-title-section>
+        <div
+          className="flex-shrink-0 grid justify-items-center"
+          data-title-section
+        >
           <div className="relative z-50 inline-block">
             <Logo />
           </div>
 
-          <h1 className=" font-semibold text-2xl xl:leading-[3.5rem] xl:text-5xl headline mt-6 font-display">
+          <h1 className=" font-semibold text-center xl:text-left text-2xl xl:leading-[3.5rem] xl:text-5xl headline mt-6 font-display">
             Node Dependencies UI <br /> for VS Code
           </h1>
 
-          <div className="grid justify-items-center gap-2 xl:gap-0 xl:flex xl:space-x-4 items-center mt-12">
+          <div className="grid justify-items-center gap-4 xl:gap-0 xl:flex xl:space-x-4 items-center mt-12">
             <div className="relative">
               <Button
                 href="vscode:extension/idered.npm"
@@ -384,39 +387,35 @@ export default function Home() {
       </section>
 
       <section
-        className="min-h-screen max-w-[1020px] mx-auto flex items-center justify-center"
+        className="min-h-screen max-w-[1020px] w-full mx-auto grid justify-items-center content-center"
         data-section="6"
       >
-        <div>
-          <div className="grid items-center mt-12  justify-items-center">
-            <div className="relative">
-              <Button
-                href="vscode:extension/idered.npm"
-                className="h-32 px-[200px] block text-3xl peer relative z-10"
-              >
-                Install
-              </Button>
-              <Button
-                aria-hidden="true"
-                tabIndex={-1}
-                href="vscode:extension/idered.npm"
-                className="h-32 px-[200px] block text-3xl absolute left-0 blur-lg transition-transform peer-hover:scale-x-105 peer-hover:scale-y-125 peer-active:scale-75 duration-500"
-              >
-                Install
-              </Button>
-            </div>
+        <div className="relative w-full max-w-[480px]">
+          <Button
+            href="vscode:extension/idered.npm"
+            className="h-24 xl:h-32 w-full justify-center text-3xl peer relative z-10"
+          >
+            Install
+          </Button>
+          <Button
+            aria-hidden="true"
+            tabIndex={-1}
+            href="vscode:extension/idered.npm"
+            className="h-24 xl:h-32 w-full justify-center text-3xl absolute left-0 blur-lg transition-transform peer-hover:scale-x-105 peer-hover:scale-y-125 peer-active:scale-75 duration-500"
+          >
+            Install
+          </Button>
+        </div>
 
-            <div className="text-indigo-200/50 text-sm mt-6">
-              Using VS Code Insiders? Click{" "}
-              <a
-                href="vscode-insiders:extension/idered.npm"
-                className="text-[#33e6cb]/75 hover:text-[#33e6cb]/100 transition-colors"
-              >
-                here
-              </a>{" "}
-              to install.
-            </div>
-          </div>
+        <div className="text-indigo-200/50 text-sm mt-6">
+          Using VS Code Insiders? Click{" "}
+          <a
+            href="vscode-insiders:extension/idered.npm"
+            className="text-[#33e6cb]/75 hover:text-[#33e6cb]/100 transition-colors"
+          >
+            here
+          </a>{" "}
+          to install.
         </div>
         <div className="text-indigo-200/50 text mt-24 fixed bottom-0 inset-x-0 text-center py-8 text-sm">
           Made with{" "}
