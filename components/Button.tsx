@@ -12,7 +12,7 @@ export default function Button(
       href={props.href}
       className={cx(
         props.className,
-        "border border-transparent bg-button text-white h-10 rounded-full inline-flex items-center px-12 font-medium "
+        "border border-transparent bg-button text-white rounded-full inline-flex items-center font-medium "
       )}
     >
       {props.children}

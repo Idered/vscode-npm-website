@@ -57,161 +57,163 @@ export default function Home() {
       pin: true,
     };
 
-    register(
-      ScrollTrigger.create({
-        trigger: "[data-title-section]",
-        start: "50% 50%",
-        end: "bottom top",
-        scrub: true,
-        pin: true,
-        animation: gsap.to("[data-title-section]", {
-          keyframes: {
-            opacity: [1, 0],
-            translateX: [0, -100],
-            // scaleX: [1, 1.15],
-            // scaleY: [1, 0.9],
+    gsap.matchMedia().add("(min-width: 1020px)", () => {
+      register(
+        ScrollTrigger.create({
+          trigger: "[data-title-section]",
+          start: "50% 50%",
+          end: "bottom top",
+          scrub: true,
+          pin: true,
+          animation: gsap.to("[data-title-section]", {
+            keyframes: {
+              opacity: [1, 0],
+              translateX: [0, -100],
+              // scaleX: [1, 1.15],
+              // scaleY: [1, 0.9],
+            },
+          }),
+        }),
+        ScrollTrigger.create({
+          trigger: "[data-title-section]",
+          start: "top 30%",
+          scrub: true,
+          animation: gsap.to(".screenshot", {
+            scale: 1.25,
+          }),
+        }),
+        ScrollTrigger.create({
+          trigger: ".editor",
+          start: "50% 50%",
+          end: () => {
+            const el = document.querySelector<HTMLDivElement>(
+              "[data-section]:last-child"
+            );
+            return el?.offsetTop + el?.offsetHeight + 2000;
+          },
+          scrub: true,
+          pin: document.querySelector(".screenshot"),
+        }),
+        ScrollTrigger.create({
+          ...defaults,
+          trigger: "[data-section='1']",
+          animation: gsap.to('[data-section="1"]', titleAnimation),
+          onUpdate: (self) => {
+            const len = q.length * self.progress * 2;
+            const nextQuery = q.split("").slice(0, len).join("");
+            setQuery(nextQuery);
+            setSuggestions(nextQuery === q ? SUGGESTIONS : []);
+            setSuggestionIndex(self.progress >= 0.75 ? 1 : 0);
           },
         }),
-      }),
-      ScrollTrigger.create({
-        trigger: "[data-title-section]",
-        start: "top 30%",
-        scrub: true,
-        animation: gsap.to(".screenshot", {
-          scale: 1.25,
+        ScrollTrigger.create({
+          ...defaults,
+          trigger: "[data-section='2']",
+          animation: gsap.to('[data-section="2"]', titleAnimation),
+          onUpdate: (self) => {
+            setQuery("");
+            setSuggestions([]);
+            const isLoading = self.progress < 0.5;
+            setDependencies([
+              ...DEPENDENCIES,
+              { name: installedPackage, version: "6.4.2", isLoading },
+            ]);
+          },
+          onLeaveBack: () => setDependencies(DEPENDENCIES),
         }),
-      }),
-      ScrollTrigger.create({
-        trigger: ".editor",
-        start: "50% 50%",
-        end: () => {
-          const el = document.querySelector<HTMLDivElement>(
-            "[data-section]:last-child"
-          );
-          return el?.offsetTop + el?.offsetHeight + 2000;
-        },
-        scrub: true,
-        pin: document.querySelector(".screenshot"),
-      }),
-      ScrollTrigger.create({
-        ...defaults,
-        trigger: "[data-section='1']",
-        animation: gsap.to('[data-section="1"]', titleAnimation),
-        onUpdate: (self) => {
-          const len = q.length * self.progress * 2;
-          const nextQuery = q.split("").slice(0, len).join("");
-          setQuery(nextQuery);
-          setSuggestions(nextQuery === q ? SUGGESTIONS : []);
-          setSuggestionIndex(self.progress >= 0.75 ? 1 : 0);
-        },
-      }),
-      ScrollTrigger.create({
-        ...defaults,
-        trigger: "[data-section='2']",
-        animation: gsap.to('[data-section="2"]', titleAnimation),
-        onUpdate: (self) => {
-          setQuery("");
-          setSuggestions([]);
-          const isLoading = self.progress < 0.5;
-          setDependencies([
-            ...DEPENDENCIES,
-            { name: installedPackage, version: "6.4.2", isLoading },
-          ]);
-        },
-        onLeaveBack: () => setDependencies(DEPENDENCIES),
-      }),
-      ScrollTrigger.create({
-        ...defaults,
-        trigger: "[data-section='3']",
-        animation: gsap.to('[data-section="3"]', titleAnimation),
-        onUpdate: (self) => {
-          setDependencies([
-            ...DEPENDENCIES,
-            { name: installedPackage, version: "6.4.2", isVulnerable: true },
-          ]);
-        },
-        onLeaveBack: () => {
-          setDependencies([
-            ...DEPENDENCIES,
-            { name: installedPackage, version: "6.4.2", isVulnerable: false },
-          ]);
-        },
-      }),
-      ScrollTrigger.create({
-        ...defaults,
-        trigger: "[data-section='4']",
-        animation: gsap.to('[data-section="4"]', titleAnimation),
-        onUpdate: (self) => {
-          const monorepoPackages = [
-            { name: "package.json", type: "file" as const, level: 0 },
-            { name: "components", type: "folder" as const, level: 0 },
-            { name: "avatar", type: "file" as const, level: 1 },
-            { name: "button", type: "file" as const, level: 1 },
-            { name: "dialog", type: "file" as const, level: 1 },
-          ];
-          const openDropdown = self.progress >= 0.4 && self.progress < 0.8;
-          const useDialogIndex = self.progress >= 0.55;
-          const useDialogPackage = self.progress >= 0.8;
-          const useDialogPackages = self.progress >= 0.8;
-          setPackageJsonFile(useDialogPackage ? "dialog" : "package.json");
-          setPackageJsonFileIndex(useDialogIndex ? 4 : 0);
-          setDependencies(
-            useDialogPackages
-              ? [{ name: "@radix-ui/react-dialog", version: "1.0.2" }]
-              : [
-                  ...DEPENDENCIES,
-                  {
-                    name: installedPackage,
-                    version: "6.4.2",
-                    isVulnerable: false,
-                  },
-                ]
-          );
-          setPackageJsonFiles(
-            openDropdown
-              ? monorepoPackages
-              : [
-                  {
-                    name: "package.json",
-                    type: "file" as const,
-                    level: 0,
-                  },
-                ]
-          );
-        },
-        onLeaveBack: () => {
-          setPackageJsonFile("");
-        },
-      }),
-      ScrollTrigger.create({
-        ...defaults,
-        // pinSpacing: true,
-        pin: false,
-        trigger: "[data-section='5']",
-        animation: gsap.to('[data-section="5"]', titleAnimation),
-      }),
-      ScrollTrigger.create({
-        ...defaults,
-        pinSpacing: false,
-        trigger: "[data-section='5']",
-        animation: gsap.to(".editor", {
-          opacity: 0,
-          filter: "blur(8px)",
-          scale: 1.5,
-        }),
-      }),
-      ScrollTrigger.create({
-        ...defaults,
-        pinSpacing: true,
-        trigger: "[data-section='6']",
-        animation: gsap.to('[data-section="6"]', {
-          keyframes: {
-            "0%": { opacity: 0, translateX: -32 },
-            "50%": { opacity: 1, translateX: 0 },
+        ScrollTrigger.create({
+          ...defaults,
+          trigger: "[data-section='3']",
+          animation: gsap.to('[data-section="3"]', titleAnimation),
+          onUpdate: (self) => {
+            setDependencies([
+              ...DEPENDENCIES,
+              { name: installedPackage, version: "6.4.2", isVulnerable: true },
+            ]);
+          },
+          onLeaveBack: () => {
+            setDependencies([
+              ...DEPENDENCIES,
+              { name: installedPackage, version: "6.4.2", isVulnerable: false },
+            ]);
           },
         }),
-      })
-    );
+        ScrollTrigger.create({
+          ...defaults,
+          trigger: "[data-section='4']",
+          animation: gsap.to('[data-section="4"]', titleAnimation),
+          onUpdate: (self) => {
+            const monorepoPackages = [
+              { name: "package.json", type: "file" as const, level: 0 },
+              { name: "components", type: "folder" as const, level: 0 },
+              { name: "avatar", type: "file" as const, level: 1 },
+              { name: "button", type: "file" as const, level: 1 },
+              { name: "dialog", type: "file" as const, level: 1 },
+            ];
+            const openDropdown = self.progress >= 0.4 && self.progress < 0.8;
+            const useDialogIndex = self.progress >= 0.55;
+            const useDialogPackage = self.progress >= 0.8;
+            const useDialogPackages = self.progress >= 0.8;
+            setPackageJsonFile(useDialogPackage ? "dialog" : "package.json");
+            setPackageJsonFileIndex(useDialogIndex ? 4 : 0);
+            setDependencies(
+              useDialogPackages
+                ? [{ name: "@radix-ui/react-dialog", version: "1.0.2" }]
+                : [
+                    ...DEPENDENCIES,
+                    {
+                      name: installedPackage,
+                      version: "6.4.2",
+                      isVulnerable: false,
+                    },
+                  ]
+            );
+            setPackageJsonFiles(
+              openDropdown
+                ? monorepoPackages
+                : [
+                    {
+                      name: "package.json",
+                      type: "file" as const,
+                      level: 0,
+                    },
+                  ]
+            );
+          },
+          onLeaveBack: () => {
+            setPackageJsonFile("");
+          },
+        }),
+        ScrollTrigger.create({
+          ...defaults,
+          // pinSpacing: true,
+          pin: false,
+          trigger: "[data-section='5']",
+          animation: gsap.to('[data-section="5"]', titleAnimation),
+        }),
+        ScrollTrigger.create({
+          ...defaults,
+          pinSpacing: false,
+          trigger: "[data-section='5']",
+          animation: gsap.to(".editor", {
+            opacity: 0,
+            filter: "blur(8px)",
+            scale: 1.5,
+          }),
+        }),
+        ScrollTrigger.create({
+          ...defaults,
+          pinSpacing: true,
+          trigger: "[data-section='6']",
+          animation: gsap.to('[data-section="6"]', {
+            keyframes: {
+              "0%": { opacity: 0, translateX: -32 },
+              "50%": { opacity: 1, translateX: 0 },
+            },
+          }),
+        })
+      );
+    });
 
     return () => {
       instances.forEach((instance) => instance.kill());
@@ -219,23 +221,23 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="px-8">
       <div className="[background-image:url(/noise.png)] fixed inset-0 noise-mask pointer-events-none" />
-      <div className="max-w-[1020px] mx-auto min-h-screen flex items-center">
+      <div className="max-w-[1020px] mx-auto min-h-screen grid justify-items-center content-center gap-y-12 xl:gap-0 xl:flex items-center">
         <div className="flex-shrink-0" data-title-section>
           <div className="relative z-50 inline-block">
             <Logo />
           </div>
 
-          <h1 className=" font-semibold leading-[3.5rem] text-5xl headline mt-6 font-display">
+          <h1 className=" font-semibold text-2xl xl:leading-[3.5rem] xl:text-5xl headline mt-6 font-display">
             Node Dependencies UI <br /> for VS Code
           </h1>
 
-          <div className="flex space-x-4 items-center mt-12 ">
+          <div className="grid justify-items-center gap-2 xl:gap-0 xl:flex xl:space-x-4 items-center mt-12">
             <div className="relative">
               <Button
                 href="vscode:extension/idered.npm"
-                className="peer relative z-10"
+                className="h-10 px-12 peer relative z-10"
               >
                 Install
               </Button>
@@ -243,7 +245,7 @@ export default function Home() {
                 aria-hidden="true"
                 tabIndex={-1}
                 href="vscode:extension/idered.npm"
-                className="absolute left-0 blur-lg transition-transform peer-hover:scale-x-105 peer-hover:scale-y-125 peer-active:scale-75 duration-500"
+                className="h-10 px-12 absolute left-0 blur-lg transition-transform peer-hover:scale-x-105 peer-hover:scale-y-125 peer-active:scale-75 duration-500"
               >
                 Install
               </Button>
@@ -264,7 +266,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="screenshot w-[360px] ml-auto grid justify-end">
+        <div className="screenshot w-[360px] xl:ml-auto grid justify-end relative">
           <Editor
             className="editor min-w-[368px]"
             query={query}
@@ -357,7 +359,7 @@ export default function Home() {
             <div className="relative">
               <Button
                 href="vscode:extension/idered.npm"
-                className="h-32 px-[200px] text-3xl peer relative z-10"
+                className="h-32 px-[200px] block text-3xl peer relative z-10"
               >
                 Install
               </Button>
@@ -365,7 +367,7 @@ export default function Home() {
                 aria-hidden="true"
                 tabIndex={-1}
                 href="vscode:extension/idered.npm"
-                className="h-32 px-[200px] text-3xl absolute left-0 blur-lg transition-transform peer-hover:scale-x-105 peer-hover:scale-y-125 peer-active:scale-75 duration-500"
+                className="h-32 px-[200px] block text-3xl absolute left-0 blur-lg transition-transform peer-hover:scale-x-105 peer-hover:scale-y-125 peer-active:scale-75 duration-500"
               >
                 Install
               </Button>
@@ -398,6 +400,7 @@ export default function Home() {
           >
             @Idered
           </a>
+          .
         </div>
       </section>
 
