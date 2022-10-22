@@ -230,25 +230,27 @@ export default function Home() {
           name="description"
           content="Manage npm dependencies from Visual Studio Code sidebar. Supports npm, yarn, pnpm."
         />
-        <meta property="og:type" content="website"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta property="og:type" content="website" />
         {/* prettier-ignore */}
-        <meta property="og:image" content="https://npm.kasper.io/og-image.png"></meta>
-        <meta property="og:image:width" content="1200"></meta>
-        <meta property="og:image:height" content="630"></meta>
-        <meta property="twitter:domain" content="npm.kasper.io"></meta>
-        <meta property="twitter:card" content="summary_large_image"></meta>
+        <meta property="og:image" content="https://npm.kasper.io/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="twitter:domain" content="https://npm.kasper.io" />
+        <meta name="twitter:creator" content="@idered" />
+        <meta property="twitter:card" content="summary_large_image" />
         {/* prettier-ignore */}
-        <meta property="twitter:image" content="https://npm.kasper.io/og-image.png"></meta>
+        <meta property="twitter:image" content="https://npm.kasper.io/og-image.png" />
         {/* prettier-ignore */}
-        <meta property="og:title" content="Node Dependencies UI for VS Code"></meta>
+        <meta property="og:title" content="Node Dependencies UI for VS Code" />
         {/* prettier-ignore */}
-        <meta property="twitter:title" content="Node Dependencies UI for VS Code"></meta>
+        <meta property="twitter:title" content="Node Dependencies UI for VS Code" />
         {/* prettier-ignore */}
-        <meta property="og:description" content="Manage npm dependencies from Visual Studio Code sidebar. Supports npm, yarn, pnpm."></meta>
+        <meta property="og:description" content="Manage npm dependencies from Visual Studio Code sidebar. Supports npm, yarn, pnpm." />
         {/* prettier-ignore */}
-        <meta property="twitter:description" content="Manage npm dependencies from Visual Studio Code sidebar. Supports npm, yarn, pnpm."></meta>
-        <meta property="og:url" content="https://npm.kasper.io/"></meta>
-        <meta property="twitter:url" content="https://npm.kasper.io/"></meta>
+        <meta property="twitter:description" content="Manage npm dependencies from Visual Studio Code sidebar. Supports npm, yarn, pnpm." />
+        <meta property="og:url" content="https://npm.kasper.io/" />
+        <meta property="twitter:url" content="https://npm.kasper.io/" />
       </Head>
       <div className="[background-image:url(/noise.png)] fixed inset-0 noise-mask pointer-events-none" />
       <div className="max-w-[1020px] mx-auto min-h-screen grid justify-items-center content-center gap-y-12 xl:gap-0 xl:flex items-center">
