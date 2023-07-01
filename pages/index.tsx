@@ -227,7 +227,7 @@ export default function Home() {
         <title>Node Dependencies UI for VS Code</title>
         <meta
           name="description"
-          content="Manage npm dependencies from Visual Studio Code sidebar. Supports npm, yarn, pnpm."
+          content="Manage npm dependencies from Visual Studio Code sidebar. Supports npm, yarn, pnpm, bun."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -242,7 +242,7 @@ export default function Home() {
         />
         <meta
           name="twitter:description"
-          content="Manage npm dependencies from Visual Studio Code sidebar. Supports npm, yarn, pnpm."
+          content="Manage npm dependencies from Visual Studio Code sidebar. Supports npm, yarn, pnpm, bun."
         />
 
         <meta property="og:type" content="website" />
@@ -252,7 +252,7 @@ export default function Home() {
         <meta property="og:image:height" content="630" />
         <meta property="og:title" content="Node Dependencies UI for VS Code" />
         {/* prettier-ignore */}
-        <meta property="og:description" content="Manage npm dependencies from Visual Studio Code sidebar. Supports npm, yarn, pnpm." />
+        <meta property="og:description" content="Manage npm dependencies from Visual Studio Code sidebar. Supports npm, yarn, pnpm, bun." />
         <meta property="og:url" content="https://npm.kasper.io/" />
       </Head>
       <div className="[background-image:url(/noise.png)] fixed inset-0 noise-mask pointer-events-none" />
@@ -338,7 +338,7 @@ export default function Home() {
           <h2 className="text-[#33e6cb] font-bold text-4xl font-display">
             Supports
             <span className="text-white">
-              <br /> npm, yarn and pnpm
+              <br /> npm, yarn, pnpm and bun
             </span>
           </h2>
         </div>
